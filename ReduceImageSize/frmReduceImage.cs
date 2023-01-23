@@ -266,9 +266,10 @@ namespace ReduceImageSize
                                         break;
                                     }
                                 }
-                            }
+                            }                                                      
 
                         }
+                        
                     }
                     else
                     {
@@ -319,8 +320,15 @@ namespace ReduceImageSize
                         }
 
                     }
-                    
-                    
+
+                    if (myImage.Height / 1.5 > 1000 && myImage.Height / 2 < 1000)
+                    {
+                        double newWidth = myImage.Width / 1.6;
+                        double newHeight = myImage.Height / 1.6;
+                        var newimg = ResizeImage(myImage, (int)newWidth, (int)newHeight);
+                        SavePng(destImagePath, newimg, trackBar1.Value * 5);
+                        //break;
+                    }
                     //Application.DoEvents();
                 }
                                 
