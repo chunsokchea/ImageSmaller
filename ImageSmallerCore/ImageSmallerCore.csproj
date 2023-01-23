@@ -8,6 +8,7 @@
     <ApplicationIcon>logo.ico</ApplicationIcon>
     <Version>1.1.0</Version>
     <Copyright>SOKCHEA CHUN</Copyright>
+    <StartupObject>ImageSmallerCore.Program</StartupObject>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

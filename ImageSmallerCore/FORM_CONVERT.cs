@@ -1,18 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace ImageSmallerCore
+﻿namespace ImageSmallerCore
 {
     public partial class FORM_CONVERT : Form
     {
@@ -75,26 +61,15 @@ namespace ImageSmallerCore
                         var pathToImage = path1 + $"/{itemRow.SubItems[0].Text.ToString().ToLower()}";
                         var myImage = Image.FromFile(pathToImage, true);
                         var destImagePath = path2 + $"/{itemRow.SubItems[0].Text.ToString().ToLower()}";
-                        SaveJpeg(destImagePath, myImage, trackBar1.Value * 5,comboBox1,Convert.ToInt16(textBox1.Text), Convert.ToInt16(textBox2.Text));
-                        
+                        SaveJpeg(destImagePath, myImage, trackBar1.Value * 5, comboBox1, Convert.ToInt16(textBox1.Text), Convert.ToInt16(textBox2.Text));
+
                         Application.DoEvents();
                     }
-                    //progressBar1.Value = itemRow.Index * progressBar1.Maximum / (itemRow.Count-1);
+
                 }
-                //for (var i = 0; i < listView1.Items.Count - 1; i++)
-                //{
-                //    var pathToImage = path1 + $"/{listView1.Items["File_Name"].SubItems[i].Text.ToLower()}";
-                //    var myImage = Image.FromFile(pathToImage, true);
-                //    var destImagePath = path2 + $"/{listView1.Items[i].SubItems["File_Name"].Text.ToString().ToLower()}";
-                //    SaveJpeg(destImagePath, myImage, trackBar1.Value * 5);
-                //    progressBar1.Value = i * progressBar1.Maximum / (listView1.Items.Count - 1);
-                //    Application.DoEvents();
-                //}
+
                 progressBar1.Value = 100;
                 Process.Start("explorer.exe", $"/open, {path2}");
-                //MessageBox.Show("Convertជោគជ័យ!");
-                //progressBarX1.Visible = false;
-                //listView1.DataSource = null;
                 listView1.Clear();
                 label5.Text = "";
                 label7.Text = "";
@@ -104,7 +79,7 @@ namespace ImageSmallerCore
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error!" +  ex.ToString());
+                MessageBox.Show("Error!" + ex.ToString());
                 //throw;
             }
         }
@@ -123,13 +98,13 @@ namespace ImageSmallerCore
             //var nImage = new Image;
             if (comboBox.SelectedIndex == 1)
             {
-                if (width > 0 || height>0)
+                if (width > 0 || height > 0)
                 {
-                        ResizeImage(img, width, height).Save(path, jpegCodec, encoderParams);
+                    ResizeImage(img, width, height).Save(path, jpegCodec, encoderParams);
                 }
                 else
                 {
-                    MessageBox.Show("សូមកំណត់ទំហំរូបភាពម្តងទៀត!");                    
+                    MessageBox.Show("សូមកំណត់ទំហំរូបភាពម្តងទៀត!");
                     return;
                 }
             }
@@ -267,7 +242,7 @@ namespace ImageSmallerCore
                 }
                 else
                 { }
-               
+
 
             }
             if (dt.Rows.Count > 0)
@@ -283,9 +258,9 @@ namespace ImageSmallerCore
                     listitem.SubItems.Add(dr["File_Size"].ToString());
                     listitem.SubItems.Add(dr["Create_Date"].ToString());
                     listView1.Items.Add(listitem);
-                }                
+                }
             }
-            lblTotal.Text = dt.Rows.Count.ToString()+" រូប";
+            lblTotal.Text = dt.Rows.Count.ToString() + " រូប";
             //label4.Text = "សរុប " + (dataGridView1.Rows.Count - 1).ToString();
             //MessageBox.Show(dt.Rows.Count.ToString());
         }
