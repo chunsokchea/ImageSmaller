@@ -75,26 +75,17 @@ namespace ImageSmallerCore
                         var pathToImage = path1 + $"/{itemRow.SubItems[0].Text.ToString().ToLower()}";
                         var myImage = Image.FromFile(pathToImage, true);
                         var destImagePath = path2 + $"/{itemRow.SubItems[0].Text.ToString().ToLower()}";
-                        SaveJpeg(destImagePath, myImage, trackBar1.Value * 5,comboBox1,Convert.ToInt16(textBox1.Text), Convert.ToInt16(textBox2.Text));
-                        
+                        //SaveJpeg(destImagePath, myImage, trackBar1.Value * 5,comboBox1,Convert.ToInt16(textBox1.Text), Convert.ToInt16(textBox2.Text));
+
+                        SaveJpeg(destImagePath, myImage, 75, comboBox1, myImage.Width, myImage.Height);
                         Application.DoEvents();
                     }
-                    //progressBar1.Value = itemRow.Index * progressBar1.Maximum / (itemRow.Count-1);
+                    
                 }
-                //for (var i = 0; i < listView1.Items.Count - 1; i++)
-                //{
-                //    var pathToImage = path1 + $"/{listView1.Items["File_Name"].SubItems[i].Text.ToLower()}";
-                //    var myImage = Image.FromFile(pathToImage, true);
-                //    var destImagePath = path2 + $"/{listView1.Items[i].SubItems["File_Name"].Text.ToString().ToLower()}";
-                //    SaveJpeg(destImagePath, myImage, trackBar1.Value * 5);
-                //    progressBar1.Value = i * progressBar1.Maximum / (listView1.Items.Count - 1);
-                //    Application.DoEvents();
-                //}
+                
                 progressBar1.Value = 100;
                 Process.Start("explorer.exe", $"/open, {path2}");
-                //MessageBox.Show("Convertជោគជ័យ!");
-                //progressBarX1.Visible = false;
-                //listView1.DataSource = null;
+                
                 listView1.Clear();
                 label5.Text = "";
                 label7.Text = "";
@@ -105,7 +96,7 @@ namespace ImageSmallerCore
             catch (Exception ex)
             {
                 MessageBox.Show("Error!" +  ex.ToString());
-                //throw;
+                
             }
         }
         public static void SaveJpeg(string path, Image img, int quality, ComboBox comboBox, int width, int height)
@@ -120,23 +111,27 @@ namespace ImageSmallerCore
             //var pngCodec = GetEncoderInfo("image/png");
             var encoderParams = new EncoderParameters(1);
             encoderParams.Param[0] = qualityParam;
+            //width=img.Width;
+            //height=img.Height;
             //var nImage = new Image;
-            if (comboBox.SelectedIndex == 1)
-            {
-                if (width > 0 || height>0)
-                {
-                        ResizeImage(img, width, height).Save(path, jpegCodec, encoderParams);
-                }
-                else
-                {
-                    MessageBox.Show("សូមកំណត់ទំហំរូបភាពម្តងទៀត!");                    
-                    return;
-                }
-            }
-            else
-            {
-                img.Save(path, jpegCodec, encoderParams);
-            }
+            
+            //if (comboBox.SelectedIndex == 1)
+            //{
+            //    if (width > 0 || height>0)
+            //    {
+            //            ResizeImage(img, width, height).Save(path, jpegCodec, encoderParams);
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("សូមកំណត់ទំហំរូបភាពម្តងទៀត!");                    
+            //        return;
+            //    }
+            //}
+            //else
+            //{
+            //    img.Save(path, jpegCodec, encoderParams);
+            //}
+            ResizeImage(img, width, height).Save(path, jpegCodec, encoderParams);
             //nImage.Save(path, jpegCodec, encoderParams);
             //img.Save(path, pngCodec, encoderParams);
         }
@@ -176,6 +171,21 @@ namespace ImageSmallerCore
         }
         public static Bitmap ResizeImage(Image image, int width, int height)
         {
+            for (int i = 1; i <= 10; i++)
+            {
+                if ((width / i > 800 && width / i < 1024) && width > height)
+                {
+                    width = width / i;
+                    height = height / i;
+                    break;
+                }
+                else if (height / i > 400 && height / i < 800 && width < height)
+                {
+                    height = height / i;
+                    width = width / i;
+                    break ;
+                }
+            }
             var destRect = new Rectangle(0, 0, width, height);
             var destImage = new Bitmap(width, height);
 
@@ -230,7 +240,9 @@ namespace ImageSmallerCore
                     {
                         //Add Data Grid Columns with name
                         dt.Columns.Add("File_Name");
-                        dt.Columns.Add("File_Type");
+                        dt.Columns.Add("File_Type");                                              
+                        //dt.Columns.Add("Width");
+                        //dt.Columns.Add("Height");
                         dt.Columns.Add("File_Size");
                         dt.Columns.Add("Create_Date");
                     }
@@ -248,7 +260,9 @@ namespace ImageSmallerCore
                 //Get File name of each file name
                 dr["File_Name"] = f1.Name;
                 //Get File Type/Extension of each file 
-                dr["File_Type"] = f1.Extension;
+                //dr["File_Type"] = f1.Extension;
+                //dr["Width"] = f1.;
+                //dr["Height"] = "";
                 //Get File Size of each file in KB format
                 dr["File_Size"] = (f.Length / 1024).ToString() + "KB";
                 //Get file Create Date and Time 
