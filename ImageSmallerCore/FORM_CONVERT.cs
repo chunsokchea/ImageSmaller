@@ -11,6 +11,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using ComboBox = System.Windows.Forms.ComboBox;
 
 namespace ImageSmallerCore
 {
@@ -19,11 +21,11 @@ namespace ImageSmallerCore
         DataTable dt = new DataTable();
         DataRow dr;
         String[] s1;
-        string path1, path2;
+        string sourcePath, savePath;
         public FORM_CONVERT()
         {
             InitializeComponent();
-            listView1.View = View.Details;
+            //listView1.View = View.Details;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -36,13 +38,13 @@ namespace ImageSmallerCore
             var selectFolder = new FolderBrowserDialog();
             if (selectFolder.ShowDialog() == DialogResult.OK)
             {
-                path2 = selectFolder.SelectedPath;
-                if (path1 == path2)
+                savePath = selectFolder.SelectedPath;
+                if (sourcePath == savePath)
                 {
                     MessageBox.Show("ទីតាំងទាំងពីរដូចគ្នា, សូមរើសទីតាំងថ្មី!");
-                    path2 = "";
+                    savePath = "";
                 }
-                label7.Text = path2;
+                label7.Text = savePath;
             }
         }
 
@@ -53,12 +55,18 @@ namespace ImageSmallerCore
 
         private void label3_Click(object sender, EventArgs e)
         {
-            if (path2 == "")
+            
+            if (string.IsNullOrEmpty(savePath))
             {
-                MessageBox.Show("សូមរើសទីតាំងទុករូបភាពបំលែងរួច!");
-                return;
+                //MessageBox.Show("សូមរើសទីតាំងទុករូបភាពបំលែងរួច!");
+                //return;
+                savePath = Application.StartupPath + "ImageSave";
+                if (!Directory.Exists(savePath))
+                {
+                    Directory.CreateDirectory(savePath);
+                }
             }
-            else if (path1 == "")
+            else if (sourcePath == "")
             {
                 MessageBox.Show("សូមរើសទីតាំងរូបភាពដែលត្រូវបំលែង!");
                 return;
@@ -72,25 +80,25 @@ namespace ImageSmallerCore
                     for (var i = 0; i < itemRow.SubItems.Count; i++)
                     {
                         // MessageBox.Show(itemRow.SubItems[0].Text.ToString());
-                        var pathToImage = path1 + $"/{itemRow.SubItems[0].Text.ToString().ToLower()}";
+                        var pathToImage = sourcePath + $"/{itemRow.SubItems[0].Text.ToString().ToLower()}";
                         var myImage = Image.FromFile(pathToImage, true);
-                        var destImagePath = path2 + $"/{itemRow.SubItems[0].Text.ToString().ToLower()}";
+                        var destImagePath = savePath + $"/{itemRow.SubItems[0].Text.ToString().ToLower()}";
                         //SaveJpeg(destImagePath, myImage, trackBar1.Value * 5,comboBox1,Convert.ToInt16(textBox1.Text), Convert.ToInt16(textBox2.Text));
 
-                        SaveJpeg(destImagePath, myImage, 75, comboBox1, myImage.Width, myImage.Height);
+                        SaveJpeg(destImagePath, myImage, 75, cbo1, myImage.Width, myImage.Height);
                         Application.DoEvents();
                     }
                     
                 }
                 
                 progressBar1.Value = 100;
-                Process.Start("explorer.exe", $"/open, {path2}");
+                Process.Start("explorer.exe", $"/open, {savePath}");
                 
                 listView1.Clear();
                 label5.Text = "";
                 label7.Text = "";
-                path1 = "";
-                path2 = "";
+                sourcePath = "";
+                savePath = "";
                 lblTotal.Text = "";
             }
             catch (Exception ex)
@@ -165,9 +173,30 @@ namespace ImageSmallerCore
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            comboBox1.SelectedIndex = 0;
+            cbo1.SelectedIndex = 0;
             textBox1.Enabled = false;
             textBox2.Enabled = false;
+
+            listView1.View = View.Details;
+            listView1.FullRowSelect = true;
+            listView1.GridLines = true;
+
+            //// Add columns
+            //listView1.Columns.Add("File Name", 200, HorizontalAlignment.Left);
+            //listView1.Columns.Add("File Type", 100, HorizontalAlignment.Left);
+            //listView1.Columns.Add("File Size", 80, HorizontalAlignment.Left);
+            //listView1.Columns.Add("Created Date", 120, HorizontalAlignment.Left);
+
+            //// Make File Name column fill remaining width
+            //listView1.Columns[0].Width = listView1.ClientSize.Width
+            //    - listView1.Columns.Cast<ColumnHeader>().Skip(1).Sum(c => c.Width);
+            
+            listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            // Make File Name column fill remaining width
+            listView1.Columns[0].Width = listView1.Width - 350;
+            listView1.Columns[1].Width = 100;
+            listView1.Columns[2].Width = 100;
+            listView1.Columns[3].Width = 120;
         }
         public static Bitmap ResizeImage(Image image, int width, int height)
         {
@@ -211,7 +240,7 @@ namespace ImageSmallerCore
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedIndex == 1)
+            if (cbo1.SelectedIndex == 1)
             {
                 textBox1.Enabled = true;
                 textBox2.Enabled = true;
@@ -220,18 +249,20 @@ namespace ImageSmallerCore
 
         private void label5_Click(object sender, EventArgs e)
         {
+            dt.Rows.Clear();
+            listView1.Items.Clear();
             var selectFolder = new FolderBrowserDialog();
             if (selectFolder.ShowDialog() == DialogResult.OK)
             {
-                path1 = selectFolder.SelectedPath;
-                if (path1 == path2)
+                sourcePath = selectFolder.SelectedPath;
+                if (sourcePath == savePath)
                 {
                     MessageBox.Show("ទីតាំងទាំងពីរដូចគ្នា, សូមរើសទីតាំងថ្មី!");
-                    path1 = "";
+                    sourcePath = "";
                 }
-                label5.Text = path1;
+                label5.Text = sourcePath;
             }
-            s1 = Directory.GetFiles(path1);
+            s1 = Directory.GetFiles(sourcePath);
             for (var i = 0; i <= s1.Length - 1; i++)
             {
                 try
@@ -259,16 +290,13 @@ namespace ImageSmallerCore
                 dr = dt.NewRow();
                 //Get File name of each file name
                 dr["File_Name"] = f1.Name;
-                //Get File Type/Extension of each file 
-                //dr["File_Type"] = f1.Extension;
-                //dr["Width"] = f1.;
-                //dr["Height"] = "";
+                dr["File_Type"] =  f1.Extension.Replace(".","");
                 //Get File Size of each file in KB format
                 dr["File_Size"] = (f.Length / 1024).ToString() + "KB";
                 //Get file Create Date and Time 
                 dr["Create_Date"] = f1.CreationTime.Date.ToString("dd/MM/yyyy");
                 //Insert collected file details in Datatable
-                if (f1.Extension.ToUpper() == ".jpg".ToUpper() || f1.Extension.ToUpper() == ".jpeg".ToUpper()) // || f1.Extension.ToUpper() == ".png".ToUpper() || f1.Extension.ToUpper() == ".gif".ToUpper())
+                if (f1.Extension.ToUpper() == ".jpg".ToUpper() || f1.Extension.ToUpper() == ".jpeg".ToUpper()  || f1.Extension.ToUpper() == ".png".ToUpper())
                     dt.Rows.Add(dr);
 
                 if ((f.Length / 1024) > 20000)

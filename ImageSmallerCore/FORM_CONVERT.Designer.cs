@@ -44,7 +44,7 @@
             label7 = new System.Windows.Forms.Label();
             lblTotal = new System.Windows.Forms.Label();
             label8 = new System.Windows.Forms.Label();
-            comboBox1 = new System.Windows.Forms.ComboBox();
+            cbo1 = new System.Windows.Forms.ComboBox();
             textBox1 = new System.Windows.Forms.TextBox();
             textBox2 = new System.Windows.Forms.TextBox();
             label1 = new System.Windows.Forms.Label();
@@ -56,7 +56,7 @@
             progressBar1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             progressBar1.Location = new System.Drawing.Point(12, 380);
             progressBar1.Name = "progressBar1";
-            progressBar1.Size = new System.Drawing.Size(776, 31);
+            progressBar1.Size = new System.Drawing.Size(888, 31);
             progressBar1.TabIndex = 0;
             // 
             // listView1
@@ -65,7 +65,7 @@
             listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { Fname, fType, Fsize, date });
             listView1.Location = new System.Drawing.Point(12, 62);
             listView1.Name = "listView1";
-            listView1.Size = new System.Drawing.Size(776, 310);
+            listView1.Size = new System.Drawing.Size(888, 310);
             listView1.TabIndex = 1;
             listView1.UseCompatibleStateImageBehavior = false;
             // 
@@ -73,6 +73,7 @@
             // 
             Fname.Name = "Fname";
             Fname.Text = "File Name";
+            Fname.Width = 200;
             // 
             // fType
             // 
@@ -94,7 +95,7 @@
             trackBar1.Location = new System.Drawing.Point(64, 21);
             trackBar1.Maximum = 20;
             trackBar1.Name = "trackBar1";
-            trackBar1.Size = new System.Drawing.Size(104, 45);
+            trackBar1.Size = new System.Drawing.Size(104, 56);
             trackBar1.TabIndex = 2;
             trackBar1.Value = 12;
             trackBar1.Scroll += trackBar1_Scroll;
@@ -104,17 +105,17 @@
             lblPercent.AutoSize = true;
             lblPercent.Location = new System.Drawing.Point(168, 21);
             lblPercent.Name = "lblPercent";
-            lblPercent.Size = new System.Drawing.Size(34, 22);
+            lblPercent.Size = new System.Drawing.Size(42, 27);
             lblPercent.TabIndex = 3;
             lblPercent.Text = "60%";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new System.Drawing.Font("Khmer OS Content", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label2.Font = new System.Drawing.Font("Khmer OS Content", 9F);
             label2.Location = new System.Drawing.Point(14, 21);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(54, 22);
+            label2.Size = new System.Drawing.Size(68, 27);
             label2.TabIndex = 3;
             label2.Text = "គុណភាព";
             // 
@@ -122,9 +123,9 @@
             // 
             label3.BackColor = System.Drawing.Color.FromArgb(24, 69, 138);
             label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            label3.Font = new System.Drawing.Font("Khmer OS Muol", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label3.Font = new System.Drawing.Font("Khmer OS Muol", 9F);
             label3.ForeColor = System.Drawing.Color.White;
-            label3.Location = new System.Drawing.Point(354, 543);
+            label3.Location = new System.Drawing.Point(392, 544);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(95, 32);
             label3.TabIndex = 3;
@@ -135,10 +136,10 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new System.Drawing.Font("Khmer OS Content", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label4.Font = new System.Drawing.Font("Khmer OS Content", 9F);
             label4.Location = new System.Drawing.Point(13, 423);
             label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(88, 22);
+            label4.Size = new System.Drawing.Size(110, 27);
             label4.TabIndex = 3;
             label4.Text = "ទីតាងដើមរូបភាព";
             // 
@@ -149,17 +150,17 @@
             label5.ForeColor = System.Drawing.Color.Maroon;
             label5.Location = new System.Drawing.Point(13, 445);
             label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(774, 22);
+            label5.Size = new System.Drawing.Size(886, 22);
             label5.TabIndex = 3;
             label5.Click += label5_Click;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Font = new System.Drawing.Font("Khmer OS Content", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label6.Font = new System.Drawing.Font("Khmer OS Content", 9F);
             label6.Location = new System.Drawing.Point(12, 486);
             label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(63, 22);
+            label6.Size = new System.Drawing.Size(78, 27);
             label6.TabIndex = 3;
             label6.Text = "រក្សារទុកនៅ";
             // 
@@ -170,15 +171,15 @@
             label7.ForeColor = System.Drawing.Color.Maroon;
             label7.Location = new System.Drawing.Point(14, 508);
             label7.Name = "label7";
-            label7.Size = new System.Drawing.Size(774, 22);
+            label7.Size = new System.Drawing.Size(886, 22);
             label7.TabIndex = 3;
             label7.Click += label7_Click;
             // 
             // lblTotal
             // 
             lblTotal.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            lblTotal.Location = new System.Drawing.Point(12, 414);
+            lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            lblTotal.Location = new System.Drawing.Point(68, 414);
             lblTotal.Name = "lblTotal";
             lblTotal.Size = new System.Drawing.Size(776, 22);
             lblTotal.TabIndex = 3;
@@ -191,30 +192,30 @@
             label8.AutoSize = true;
             label8.Location = new System.Drawing.Point(354, 21);
             label8.Name = "label8";
-            label8.Size = new System.Drawing.Size(42, 22);
+            label8.Size = new System.Drawing.Size(50, 27);
             label8.TabIndex = 4;
             label8.Text = "label8";
             label8.Visible = false;
             label8.Click += label8_Click;
             // 
-            // comboBox1
+            // cbo1
             // 
-            comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "រូបដើម", "ផ្ទាល់ខ្លួន" });
-            comboBox1.Location = new System.Drawing.Point(521, 21);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new System.Drawing.Size(87, 30);
-            comboBox1.TabIndex = 5;
-            comboBox1.Visible = false;
-            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            cbo1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbo1.FormattingEnabled = true;
+            cbo1.Items.AddRange(new object[] { "រូបដើម", "ផ្ទាល់ខ្លួន" });
+            cbo1.Location = new System.Drawing.Point(521, 21);
+            cbo1.Name = "cbo1";
+            cbo1.Size = new System.Drawing.Size(87, 35);
+            cbo1.TabIndex = 5;
+            cbo1.Visible = false;
+            cbo1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // textBox1
             // 
             textBox1.Location = new System.Drawing.Point(614, 22);
             textBox1.Name = "textBox1";
             textBox1.PlaceholderText = "Width ";
-            textBox1.Size = new System.Drawing.Size(76, 29);
+            textBox1.Size = new System.Drawing.Size(76, 35);
             textBox1.TabIndex = 6;
             textBox1.Text = "0";
             textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -225,7 +226,7 @@
             textBox2.Location = new System.Drawing.Point(711, 22);
             textBox2.Name = "textBox2";
             textBox2.PlaceholderText = "Height ";
-            textBox2.Size = new System.Drawing.Size(76, 29);
+            textBox2.Size = new System.Drawing.Size(76, 35);
             textBox2.TabIndex = 7;
             textBox2.Text = "0";
             textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -236,19 +237,19 @@
             label1.AutoSize = true;
             label1.Location = new System.Drawing.Point(692, 25);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(17, 22);
+            label1.Size = new System.Drawing.Size(21, 27);
             label1.TabIndex = 8;
             label1.Text = "X";
             label1.Visible = false;
             // 
             // FORM_CONVERT
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(7F, 22F);
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 27F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(800, 594);
+            ClientSize = new System.Drawing.Size(912, 594);
             Controls.Add(textBox2);
             Controls.Add(textBox1);
-            Controls.Add(comboBox1);
+            Controls.Add(cbo1);
             Controls.Add(label8);
             Controls.Add(label7);
             Controls.Add(label6);
@@ -262,7 +263,10 @@
             Controls.Add(trackBar1);
             Controls.Add(lblTotal);
             Controls.Add(label1);
-            Font = new System.Drawing.Font("Khmer OS Siemreap", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Font = new System.Drawing.Font("Khmer OS Siemreap", 9F);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "FORM_CONVERT";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Image Smaller";
@@ -293,7 +297,7 @@
         private System.Windows.Forms.ColumnHeader Fsize;
         private System.Windows.Forms.ColumnHeader date;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbo1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label1;
